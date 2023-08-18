@@ -1,0 +1,64 @@
+﻿@model DotNetDrinks.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Product Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+        @* I wasn't able to get any images from model so I added direct url for it to set to open in new image tab *@
+        <dd class="col-sm-10">
+            <a href="/img/products/216348fc-37a9-48a2-b428-01027f6170f9-canadian.png" target="_blank">
+                <img src="~/img/products/216348fc-37a9-48a2-b428-01027f6170f9-canadian.png" alt="Product Image" />
+            </a>
+        </dd>
+        <dd class="col-sm-10">
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Brand.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Id)
+        </dd>
+    </dl>
+</div>
+@* Add to cart *@
+<form method="post" action="/Store/AddToCart">
+    <input type="hidden" id="ProductId" name="ProductId" value="@Model.Id" />
+    <div class="form-group">
+        <label class="form-control" for="Quantity">Quantity: </label>
+        <input name="Quantity" id="Quantity" required
+               type="number" min="1" max="999" />
+    </div>
+    <button class="btn btn-primary">Add to Cart</button>
+</form>
+@* Go back to Browse page *@
+<a href="javascript:history.go(-1);">Go back to Browse</a>
